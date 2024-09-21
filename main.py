@@ -75,11 +75,15 @@ while True:
             for button in buttonList:
                 x,y = button.pos
                 w,h = button.size
-                if x < lmList[8][0] < x+w:
-                    cv2.rectangle(img,button.pos,(x+w,y+h),(0,255,0),cv2.FILLED)
+                if x < lmList[8][0] < x+w and y<lmList[8][1]<y+h:
+                    cv2.rectangle(img,button.pos,(x+w,y+h),(175,0,175),cv2.FILLED)
                     cv2.putText(img,button.text,(x + 20 , y + 60),cv2.FONT_HERSHEY_PLAIN,4,(255,255,255), 4)
+                    l, _, _ = detector.findDistance(8,12,img,draw=False)
+                    if l<30:
+                        cv2.rectangle(img,button.pos,(x+w,y+h),(0,255,0),cv2.FILLED)
+                        cv2.putText(img,button.text,(x + 20 , y + 60),cv2.FONT_HERSHEY_PLAIN,4,(255,255,255), 4)
 
-    
+
     cv2.imshow("Image", img)
 
     # Exit the loop when 'q' is pressed
